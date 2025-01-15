@@ -60,7 +60,7 @@ button:focus-visible {
 /* Media query for screens smaller than the 'lg' breakpoint (1024px) */
 @media (max-width: 768px) {
   /* Center align the main content */
-  main {
+  main#home {
     text-align: center;
     padding: 20px;
   }
@@ -231,4 +231,20 @@ button:focus-visible {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #f6c445;
+}
+
+@keyframes glow {
+  0% {
+    filter: drop-shadow(0 0 10px rgba(219, 163, 243, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 20px rgba(185, 109, 217, 0.6));
+  }
+  100% {
+    filter: drop-shadow(0 0 10px rgba(219, 163, 243, 0.2));
+  }
+}
+
+.animate-glow {
+  animation: glow 6s infinite ;
 }

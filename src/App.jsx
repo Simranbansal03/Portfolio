@@ -83,7 +83,7 @@ const Section = ({ id, children }) => {
 
 const SeparatorLine = () => {
   return (
-    <div className="w-[95%] md:w-[85%] lg:w-[85%] max-w-[850px] h-[2px] mx-auto my-8">
+    <div className="w-[95%] md:w-[95%] lg:w-[95%] max-w-[900px] h-[1px] mx-auto my-8">
       <div className="h-full bg-gradient-to-r from-[#dba3f3] via-[#8e44ad] to-[#130950]"></div>
     </div>
   );
@@ -151,8 +151,11 @@ const App = () => {
           <a href="#about" className="text-white py-3 border-b border-white hover:text-[#f6c445] transition-colors">
             About
           </a>
-          <a href="#resume" className="text-white py-3 border-b border-white hover:text-[#f6c445] transition-colors">
-            Resume
+          <a href="#skills" className="text-white py-3 border-b border-white hover:text-[#f6c445] transition-colors">
+            Skills
+          </a>
+          <a href="#project" className="text-white py-3 border-b border-white hover:text-[#f6c445] transition-colors">
+            Projects
           </a>
           <a href="#contact" className="text-white py-3 border-b border-white hover:text-[#f6c445] transition-colors">
             Contact
@@ -173,7 +176,7 @@ const App = () => {
 
       {/* Hamburger Button */}
       <button
-        className="lg:hidden fixed top-5 right-5 z-50 bg-[#d9ac07] text-white py-2.5 px-3 shadow-lg"
+        className="lg:hidden fixed top-5 right-5 z-50 bg-[#d9ab0700] text-white py-2.5 px-3 shadow-lg"
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       >
         {isMenuOpen ? "✖" : "☰"}
@@ -213,12 +216,12 @@ const App = () => {
               <img
                 src="./file1.png"
                 alt="Illustration"
-                className="w-100 h-120 md:w-70 md:h-70"
+                className="w-100 h-120 md:w-70 md:h-70 rounded-lg animate-glow"
               />
             </div>
           </div>
-          <p className="text-white italic text-center mb-5 mt-4 pop-up delay-6">
-            "Hello, its nice meeting you."
+          <p className="text-[#ef23fa] italic text-center text-lg mb-5 mt-4 pop-up delay-6">
+            "The only place where success comes before work is in dictionary."
           </p>
         </Section>
 
@@ -226,7 +229,7 @@ const App = () => {
 
         {/* About Me Section */}
         <Section id="about">
-          <h2 className="text-3xl font-bold mb-4 text-white pop-up delay-1">
+          <h2 className="text-3xl font-bold ml-10 mb-4 text-[#d622ee] pop-up delay-1">
             {"<about/>"}
           </h2>
           <div className="flex flex-col md:flex-row gap-8">
@@ -259,28 +262,27 @@ const App = () => {
                   "GitHub",
                   "TypeScript",
                 ].map((tech, index) => (
-                  <span key={index} className="bg-gray-700 px-2 py-1 rounded">
-                    {tech}
-                  </span>
+                  <div key={index} className="flex items-center text-[#ffffff]">
+                    <span className="mr-2">➤</span>
+                    <span>{tech}</span>
+                  </div>
                 ))}
               </div>
               <p className="text-lg text-white mb-4 pop-up delay-4">
                  You can download my CV by
                 clicking the button below.
               </p>
-              <button className="bg-[#130950] text-white py-2 px-4 rounded hover:bg-[#f6c445] transition-colors pop-up delay-5 mb-5">
+              <button className="bg-[#7b6094] text-white py-2 px-4 rounded hover:bg-[#f645e1] transition-colors pop-up delay-5 mb-5">
                 <FontAwesomeIcon icon={faCamera} className="mr-2" />
                 CV
               </button>
             </div>
-            <div className="md:w-2/5 flex items-center justify-center pop-up delay-3">
-              <div className="relative w-full">
-                <img
-                  src="./your-profile-image.jpg"
-                  alt="Profile"
-                  className="w-full h-auto rounded-lg shadow-lg"
-                />
-              </div>
+            <div className="md:w-2/5  flex items-center justify-center pop-up delay-3">
+              <img
+                src="./file6.png"
+                alt="Profile"
+                className="w-full h-auto rounded-lg"
+              />
             </div>
           </div>
         </Section>
