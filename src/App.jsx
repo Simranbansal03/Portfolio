@@ -1,8 +1,8 @@
-// App.jsx
 import React, { useState, useEffect } from "react";
 import Lottie from "react-lottie-player";
 import "./index.css";
 import LoadingAnimation from "./LoadingAnimation.json";
+import Education from "./Eduani.json";
 import DeveloperAnimation from "./Animation.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faCamera } from "@fortawesome/free-solid-svg-icons";
@@ -75,9 +75,8 @@ const Section = ({ id, children, className = "" }) => {
     <section
       id={id}
       ref={ref}
-      className={`transition-opacity duration-1000 ${
-        inView ? "fade-in" : "fade-out"
-      } ${className}`}
+      className={`transition-opacity duration-1000 ${inView ? "fade-in" : "fade-out"
+        } ${className} ${id !== "home" ? "pt-24" : ""}`}
     >
       {children}
     </section>
@@ -117,32 +116,59 @@ const App = () => {
   return (
     <div className="min-h-screen bg-[#05091d]">
       {/* Top Navigation Bar */}
-      <nav className="fixed top-0 left-0 right-9 bg-[#05091d] h-16 flex items-center justify-between px-6 z-50">
+      <nav className="fixed top-0 left-0 right-7 bg-[#05091d] h-16 flex items-center justify-between px-6 z-50">
         {/* Logo Section */}
         <div className="flex items-center">
-          <span className="text-[#dba3f3] text-3xl ml-4 font-mono">{"<SB/>"}</span>
+          <a
+            href="#home"
+            className="text-[#dba3f3] text-xl ml-4 font-mono hover:text-[#c77ef0] transition-colors"
+          >
+            {"<Simran/>"}
+          </a>
         </div>
+
 
         {/* Desktop Navigation Links */}
         <div className="hidden lg:flex items-center space-x-8">
-          <a href="#home" className="text-white text-xl hover:text-[#dba3f3] transition-colors">
+          <a
+            href="#home"
+            className="text-white text-xl hover:text-[#dba3f3] transition-colors"
+          >
             Home
           </a>
-          <a href="#about" className="text-white text-xl hover:text-[#dba3f3] transition-colors">
+          <a
+            href="#about"
+            className="text-white text-xl hover:text-[#dba3f3] transition-colors"
+          >
             About
           </a>
-          <a href="#skills" className="text-white text-xl hover:text-[#dba3f3] transition-colors">
+          <a
+            href="#skills"
+            className="text-white text-xl hover:text-[#dba3f3] transition-colors"
+          >
             Skills & Experience
           </a>
-          <a href="#projects" className="text-white text-xl hover:text-[#dba3f3] transition-colors">
+          <a
+            href="#education"
+            className="text-white text-xl hover:text-[#dba3f3] transition-colors"
+          >
+            Education
+          </a>
+          <a
+            href="#projects"
+            className="text-white text-xl hover:text-[#dba3f3] transition-colors"
+          >
             Projects
           </a>
-          <a href="#contact" className="text-white text-xl hover:text-[#dba3f3] transition-colors">
+          <a
+            href="#contact"
+            className="text-white text-xl hover:text-[#dba3f3] transition-colors"
+          >
             Contact
           </a>
         </div>
 
-        {/* Menu Button for Mobile */}
+        {/* Mobile Menu Button */}
         <button
           className="lg:hidden fixed top-4 right-4 z-50 bg-[#05091d] rounded-lg p-2"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -173,9 +199,8 @@ const App = () => {
 
         {/* Mobile Menu */}
         <div
-          className={`fixed top-4 right-4 bg-[#05091d] transition-transform duration-300 lg:hidden rounded-lg shadow-lg ${
-            isMenuOpen ? "transform translate-x-0" : "transform translate-x-full"
-          }`}
+          className={`fixed top-4 right-4 bg-[#05091d] transition-transform duration-300 lg:hidden rounded-lg shadow-lg ${isMenuOpen ? "transform translate-x-0" : "transform translate-x-full"
+            }`}
         >
           <div className="flex flex-col p-4 w-64 space-y-2">
             <a
@@ -200,6 +225,13 @@ const App = () => {
               Skills & Experience
             </a>
             <a
+              href="#education"
+              className="text-white py-2 px-4 hover:bg-[#130950] rounded-md transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Education
+            </a>
+            <a
               href="#projects"
               className="text-white py-2 px-4 hover:bg-[#130950] rounded-md transition-colors"
               onClick={() => setIsMenuOpen(false)}
@@ -217,57 +249,102 @@ const App = () => {
         </div>
       </nav>
 
-      {/* Overlay for blur effect */}
-      <div
-        className={`fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${
-          isMenuOpen ? "opacity-100 z-40" : "opacity-0 pointer-events-none"
-        }`}
-        onClick={() => setIsMenuOpen(false)}
-      ></div>
-            {/* Main Content */}
-            <main className="pt-16 px-5 pb-5">
+      {/* Main Content */}
+      <main className="pt-16 px-5 pb-5">
         {/* Home Section */}
-        <Section id="home" className="h-screen relative">
-          <div className="max-w-6xl mx-auto px-4 pt-16 h-full">
-            <div className="flex flex-col md:flex-row items-center justify-center h-full">
-              <div className="md:w-1/2 text-left">
-                <h1 className="text-6xl md:text-7xl font-bold text-white mb-3 pop-up delay-1">
-                 Hi there!
-                 I am
-                </h1>
-                <h1 className="text-5xl md:text-6xl font-bold text-white mt-4 mb-4 pop-up delay-1 gradient-text">
-                 Simran Bansal
-                </h1>
-                <h2 className="text-2xl md:text-3xl text-[#debdec] mb-6 pop-up delay-2">
-                  <Typewriter
-                    texts={["Web Developer", "Creative Coder", "Tech Enthusiast"]}
-                  />
-                </h2>
-                <p className="text-lg md:text-xl text-white mb-8 max-w-2xl pop-up delay-3">
-                  Passionate web developer with experience in creating
-                  dynamic and responsive websites. I love to build web applications
-                  that solve real-world problems and enhance user experiences.
-                </p>
-                <div className="flex gap-4 pop-up delay-4">
-                  <button className="bg-[#9020c0] text-white py-3 px-6 rounded-md hover:bg-[#a027ec] transition-colors">
-                    View Work
-                  </button>
-                  <button className="bg-transparent text-white py-3 px-6 rounded-md border border-[#dba3f3] hover:bg-[#dba3f3]/10 transition-colors">
+        <Section id="home" className="h-screen flex items-center justify-between px-4 md:px-8">
+          <div className="flex flex-col md:flex-row items-center justify-between w-full max-w-6xl mx-auto">
+            {/* Left Side - Text Content */}
+            <div className="md:w-1/2 text-left space-y-6">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white">
+                Hi there! I am
+              </h1>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white gradient-text">
+                Simran Bansal
+              </h1>
+              <h2 className="text-xl md:text-3xl text-[#debdec]">
+                <Typewriter
+                  texts={["Web Developer", "Creative Coder", "Tech Enthusiast"]}
+                />
+              </h2>
+              <p className="text-base md:text-xl text-white max-w-xl">
+                Passionate web developer with experience in creating dynamic and responsive websites. I love to build web applications that solve real-world problems and enhance user experiences.
+              </p>
+              <div className="flex gap-4">
+                <button
+                  onClick={() =>
+                    document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })
+                  }
+                  className="bg-[#9020c0] text-white py-2 px-6 rounded-md hover:bg-[#a027ec] transition-colors"
+                >
+                  View Work
+                </button>
+                <a
+                  href="https://linkedin.com/in/simran-bansal-67a1a3225"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <button className="bg-transparent text-white py-2 px-6 rounded-md border border-[#dba3f3] hover:bg-[#dba3f3]/10 transition-colors">
                     Contact Me
                   </button>
-                </div>
+                </a>
               </div>
-              <div className="md:w-1/2 flex justify-end items-center pop-up delay-5">
-              <img
-              src="./file66.png"
-              alt="Developer Illustration"
-              className="w-full h-full max-w-lg animate-glow"
-            />
+            </div>
+
+            {/* Right Side - Illustration */}
+            <div className="md:w-1/2 flex justify-center items-center">
+              <div className="relative flex md:flex-row flex-col items-center gap-8">
+                <img
+                  src="./file66.png"
+                  alt="Developer Illustration"
+                  className="w-full h-auto max-w-xs md:max-w-md object-contain animate-glow"
+                />
+                <div className="social-links md:absolute md:right-[-4rem] md:top-1/2 md:transform md:-translate-y-1/2 flex md:flex-col flex-row items-center md:gap-6 gap-4 mt-4 md:mt-0">
+                  {/* Social Icons */}
+                  <a
+                    href="https://github.com/Simranbansal03"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="social-icon-link"
+                  >
+                    <FontAwesomeIcon
+                      icon={faGithub}
+                      className="text-2xl text-[#f7f7f7] hover:text-[#c77ef0] transition-all duration-300"
+                    />
+                  </a>
+                  <a
+                    href="https://linkedin.com/in/simran-bansal-67a1a3225"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="social-icon-link"
+                  >
+                    <FontAwesomeIcon
+                      icon={faLinkedin}
+                      className="text-2xl text-[#fefefe] hover:text-[#c77ef0] transition-all duration-300"
+                    />
+                  </a>
+                  <a
+                    href="https://www.instagram.com/_.simran03_/?hl=en"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="social-icon-link"
+                  >
+                    <FontAwesomeIcon
+                      icon={faInstagram}
+                      className="text-2xl text-[#fdfdfd] hover:text-[#c77ef0] transition-all duration-300"
+                    />
+                  </a>
+                  <a href="mailto:simranbansal6903@gmail.com" className="social-icon-link">
+                    <FontAwesomeIcon
+                      icon={faEnvelope}
+                      className="text-2xl text-[#fafafa] hover:text-[#c77ef0] transition-all duration-300"
+                    />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </Section>
-
         <SeparatorLine />
 
         {/* About Section */}
@@ -280,24 +357,39 @@ const App = () => {
               <div className="md:w-3/5">
                 <div className="space-y-6 text-lg">
                   <p className="text-white pop-up delay-2">
-                    Hello! I'm Simran, a passionate software engineer based in India. My journey in technology began during my early college years, where I discovered my love for creating solutions through code.
+                    Hello! I'm Simran, a passionate software engineer based in
+                    India. My journey in technology began during my early
+                    college years, where I discovered my love for creating
+                    solutions through code.
                   </p>
-                  
+
                   <p className="text-white pop-up delay-3">
-                    Currently pursuing my postgraduate degree in Software Engineering, I've been focusing on web development and software engineering. What excites me most about technology is its potential to solve real-world problems and make a positive impact on people's lives.
+                    Currently pursuing my postgraduate degree in Computer Science
+                    Engineering, I've been focusing on web development and
+                    software engineering. What excites me most about technology
+                    is its potential to solve real-world problems and make a
+                    positive impact on people's lives.
                   </p>
 
                   <p className="text-white pop-up delay-4">
-                    Beyond coding, I'm deeply interested in open-source contributions and staying up-to-date with the latest technological trends. I believe in the power of community and knowledge sharing, which drives me to actively participate in tech communities and collaborative projects.
+                    Beyond coding, I'm deeply interested in open-source
+                    contributions and staying up-to-date with the latest
+                    technological trends. I believe in the power of community
+                    and knowledge sharing, which drives me to actively
+                    participate in tech communities and collaborative projects.
                   </p>
                 </div>
-                
+
                 <div className="mt-8 pop-up delay-5">
-                  <button className="bg-[#69188c] text-white py-3 px-6 rounded-md hover:bg-[#c77ef0] transition-colors flex items-center">
-                    <FontAwesomeIcon icon={faCamera} className="mr-2" />
-                    Download CV
-                  </button>
-                </div>
+  <a
+    href="https://drive.google.com/uc?export=download&id=1AfQVQ1QJ7_tDpA0ewZpAtOBRA0VGde99"
+    className="bg-[#69188c] text-white py-3 px-6 rounded-md hover:bg-[#c77ef0] transition-colors flex items-center"
+    style={{ display: 'inline-block', textDecoration: 'none' }}
+  >
+    <FontAwesomeIcon icon={faCamera} className="mr-2" />
+    Download CV
+  </a>
+</div>
               </div>
 
               <div className="md:w-2/5 flex justify-center pop-up delay-3">
@@ -305,9 +397,9 @@ const App = () => {
                   src="./file6.png"
                   alt="Profile"
                   className="w-full h-auto max-w-md object-contain"
-                  style={{ 
-                    minHeight: '400px',
-                    objectFit: 'contain'
+                  style={{
+                    minHeight: "400px",
+                    objectFit: "contain",
                   }}
                 />
               </div>
@@ -316,29 +408,28 @@ const App = () => {
         </Section>
 
         <SeparatorLine />
-                {/* Skills & Experience Section */}
-                <Section id="skills">
+        {/* Skills & Experience Section */}
+        <Section id="skills">
           <div className="max-w-6xl mx-auto px-4">
             <h2 className="text-3xl font-bold mb-8 text-white pop-up delay-1">
-              Skills & Experience.<span className="text-[#dba3f3]"></span>
+              Skills & Experience<span className="text-[#dba3f3]">.</span>
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               {/* Left Column - Skills */}
               <div className="pop-up delay-2 space-y-16">
                 {/* Programming Languages Section */}
                 <div className="relative">
-                  {/* Dot and Line */}
-                  <div className="absolute left-0 top-0 w-4 h-4 bg-[#05091d] z-10">
-                    <div className="w-3 h-3 bg-[#dba3f3] rounded-full"></div>
-                  </div>
                   <div className="absolute left-1.5 top-0 bottom-0 w-[1px] bg-[#dba3f3] opacity-20"></div>
-                  
+                  <div className="flex items-center mb-8">
+                    <div className="relative w-4 h-4 bg-transparent z-10 mt-1">
+                      <div className="w-3 h-3 bg-[#dba3f3] rounded-full"></div>
+                    </div>
+                    <h3 className="text-[#dba3f3] text-lg ml-4">Programming Languages</h3>
+                  </div>
                   <div className="pl-8">
-                    <h3 className="text-[#dba3f3] text-lg mb-8">Programming Languages</h3>
                     <div className="grid grid-cols-3 gap-8">
                       {[
                         { name: "C++", icon: "devicon-cplusplus-plain" },
-                        { name: "Python", icon: "devicon-python-plain" },
                         { name: "HTML", icon: "devicon-html5-plain" },
                         { name: "CSS", icon: "devicon-css3-plain" },
                         { name: "JavaScript", icon: "devicon-javascript-plain" },
@@ -358,13 +449,14 @@ const App = () => {
 
                 {/* Frameworks/Libraries Section */}
                 <div className="relative">
-                  <div className="absolute left-0 top-0 w-4 h-4 bg-[#05091d] z-10">
-                    <div className="w-3 h-3 bg-[#dba3f3] rounded-full"></div>
-                  </div>
                   <div className="absolute left-1.5 top-0 bottom-0 w-[1px] bg-[#dba3f3] opacity-20"></div>
-                  
+                  <div className="flex items-center mb-8">
+                    <div className="relative w-4 h-4 bg-transparent z-10 mt-1">
+                      <div className="w-3 h-3 bg-[#dba3f3] rounded-full"></div>
+                    </div>
+                    <h3 className="text-[#dba3f3] text-lg ml-4">Frameworks/Libraries</h3>
+                  </div>
                   <div className="pl-8">
-                    <h3 className="text-[#dba3f3] text-lg mb-8">Frameworks/Libraries</h3>
                     <div className="grid grid-cols-3 gap-8">
                       {[
                         { name: "ReactJS", icon: "devicon-react-original" },
@@ -385,17 +477,21 @@ const App = () => {
 
                 {/* Tools Section */}
                 <div className="relative">
-                  <div className="absolute left-0 top-0 w-4 h-4 bg-[#05091d] z-10">
-                    <div className="w-3 h-3 bg-[#dba3f3] rounded-full"></div>
-                  </div>
                   <div className="absolute left-1.5 top-0 bottom-0 w-[1px] bg-[#dba3f3] opacity-20"></div>
-                  
+                  <div className="flex items-center mb-8">
+                    <div className="relative w-4 h-4 bg-transparent z-10 mt-1">
+                      <div className="w-3 h-3 bg-[#dba3f3] rounded-full"></div>
+                    </div>
+                    <h3 className="text-[#dba3f3] text-lg ml-4">Tools</h3>
+                  </div>
                   <div className="pl-8">
-                    <h3 className="text-[#dba3f3] text-lg mb-8">Tools</h3>
                     <div className="grid grid-cols-3 gap-8">
                       {[
                         { name: "MySQL", icon: "devicon-mysql-plain" },
                         { name: "VS Code", icon: "devicon-vscode-plain" },
+                        { name: "Canva", icon: "devicon-canva-plain" },
+                        { name: "Figma", icon: "devicon-figma-plain" },
+                        { name: "Photoshop", icon: "devicon-photoshop-plain" },
                         { name: "Git", icon: "devicon-git-plain" },
                         { name: "GitHub", icon: "devicon-github-original" },
                         { name: "ViteJS", icon: "devicon-vitejs-plain" },
@@ -413,43 +509,195 @@ const App = () => {
                 </div>
               </div>
 
-              {/* Right Column - Education */}
+              {/* Right Column - Experience */}
               <div className="pop-up delay-3 space-y-16">
                 {[
                   {
                     title: "GeeksforGeeks Student Chapter Lead",
                     from: "Head Graphic Designer",
                     period: "2023-2025",
-                    description: "Serving as a Student Chapter Lead for GeeksforGeeks, fostering a community of innovators, and empowering fellow students to enhance their coding skills and technical knowledge."
+                    description:
+                      "Serving as a Student Chapter Lead for GeeksforGeeks, fostering a community of innovators, and empowering fellow students to enhance their coding skills and technical knowledge.",
                   },
                   {
                     title: "Smart India Hackathon",
                     from: "Designed & Implemented",
                     period: "2023-2024",
-                    description: "Designed & implemented innovative solutions at Smart India Hackathon. Developed prototype driving social change & technological advancement."
+                    description:
+                      "Designed & implemented innovative solutions at Smart India Hackathon. Developed prototype driving social change & technological advancement.",
                   },
                   {
                     title: "Web Development Training",
                     from: "Internshala",
                     period: "2022-2023",
-                    description: "Completed Web Development Training at Internshala. Acquired hands-on experience in building dynamic web applications and enhancing programming skills."
-                  }
-                ].map((edu, index) => (
+                    description:
+                      "Completed Web Development Training at Internshala. Acquired hands-on experience in building dynamic web applications and enhancing programming skills.",
+                  },
+                ].map((exp, index) => (
                   <div key={index} className="relative">
-                    <div className="absolute left-0 top-0 w-4 h-4 bg-[#05091d] z-10">
-                      <div className="w-3 h-3 bg-[#dba3f3] rounded-full"></div>
-                    </div>
                     <div className="absolute left-1.5 top-0 bottom-0 w-[1px] bg-[#dba3f3] opacity-20"></div>
-                    
-                    <div className="pl-8">
-                      <h4 className="text-2xl font-bold text-white mb-1">{edu.title}</h4>
-                      <p className="text-[#dba3f3] text-lg mb-1">{edu.from}</p>
-                      <p className="text-[#dba3f3] text-lg mb-3">{edu.period}</p>
-                      <p className="text-gray-300 text-lg leading-relaxed">{edu.description}</p>
+                    <div className="flex items-start">
+                      <div className="relative w-4 h-4 bg-transparent z-10 mt-2">
+                        <div className="w-3 h-3 bg-[#dba3f3] rounded-full"></div>
+                      </div>
+                      <div className="ml-4">
+                        <h4 className="text-2xl font-bold text-white mb-1">{exp.title}</h4>
+                        <p className="text-[#dba3f3] text-lg mb-1">{exp.from}</p>
+                        <p className="text-[#dba3f3] text-lg mb-3">{exp.period}</p>
+                        <p className="text-gray-300 text-lg leading-relaxed">
+                          {exp.description}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 ))}
               </div>
+            </div>
+          </div>
+        </Section>
+        <SeparatorLine />
+
+        {/* Education Section */}
+        <Section id="education">
+          <div className="max-w-6xl mx-auto px-4">
+            <h2 className="text-5xl font-bold mb-16 text-white pop-up delay-1">
+              Education.
+            </h2>
+            <div className="flex flex-col md:flex-row gap-20">
+              {/* Left Side - Illustration */}
+              <div className="md:w-1/2 flex items-center justify-center pop-up delay-2">
+                <div className="relative">
+                  <div className="w-full max-w-[600px]">
+                    <Lottie
+                      loop
+                      play
+                      animationData={Education}
+                      style={{ width: 500, height: 350 }}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Side - Education Cards */}
+              <div className="md:w-1/2 space-y-8 pop-up delay-3">
+                {/* Education Card 1 */}
+                <div className="education-card bg-[#130950]/30 rounded-xl p-6 hover:bg-[#130950] transition-all duration-300">
+                  <div className="flex items-start gap-4">
+                    <img
+                      src="/jecrc1.png"
+                      alt="College Logo"
+                      className="w-20 h-20 rounded-lg"
+                    />
+                    <div>
+                      <h3 className="text-[#dba3f3] text-xl font-semibold mb-1">
+                      Jaipur Engineering College and Research Center
+                      </h3>
+                      <h4 className="text-white mb-2">
+                      Bachelor of Technology
+                      </h4>
+                      <p className="text-gray-400 mb-3">2021 - 2025</p>
+                      <ul className="space-y-2 text-gray-300">
+                        <li>•Computer Science & Engineering</li>
+                        
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Education Card 2 */}
+                <div className="education-card bg-[#130950]/30 rounded-xl p-6 hover:bg-[#130950] transition-all duration-300">
+                  <div className="flex items-start gap-4">
+                    <img
+                      src="/cchs.png"
+                      alt="College Logo"
+                      className="w-20 h-20 rounded-lg"
+                    />
+                    <div>
+                      <h3 className="text-[#dba3f3] text-xl font-semibold mb-1">
+                        Cambridge Court High School,Jaipur
+                      </h3>
+                      <h4 className="text-white mb-2">
+                      Senior Secondary Education(XII)
+                      </h4>
+                      <p className="text-gray-400 mb-3">2020 - 2021</p>
+                      <p className="text-gray-300">
+                        •Higher Secondary Education in PCM.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                 {/* Education Card 3 */}
+                 <div className="education-card bg-[#130950]/30 rounded-xl p-6 hover:bg-[#130950] transition-all duration-300">
+                  <div className="flex items-start gap-4">
+                    <img
+                      src="/cchs.png"
+                      alt="College Logo"
+                      className="w-20 h-20 rounded-lg"
+                    />
+                    <div>
+                      <h3 className="text-[#dba3f3] text-xl font-semibold mb-1">
+                        Cambridge Court High School,Jaipur
+                      </h3>
+                      <h4 className="text-white mb-2">
+                      Secondary Education(X)
+                      </h4>
+                      <p className="text-gray-400 mb-3">2018 - 2019</p>
+                      <p className="text-gray-300">
+                        •Completed Secondary Education with focus on Academic Excellence.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Section>
+
+        <SeparatorLine />
+        {/* Projects Section */}
+        <Section id="projects">
+          <div className="max-w-6xl mx-auto px-4">
+            <h2 className="text-3xl font-bold mb-8 text-white pop-up delay-1">
+              Projects<span className="text-[#dba3f3]">.</span>
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Project Cards */}
+              {[1, 2, 3].map((project, index) => (
+                <div
+                  key={index}
+                  className="bg-[#130950] rounded-lg overflow-hidden shadow-lg pop-up delay-2"
+                >
+                  <img
+                    src={`./project${project}.jpg`}
+                    alt={`Project ${project}`}
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-white mb-2">
+                      Project Title {project}
+                    </h3>
+                    <p className="text-gray-300 mb-4">
+                      Brief description of the project and the technologies
+                      used.
+                    </p>
+                    <div className="flex gap-2">
+                      <a
+                        href="#"
+                        className="text-[#dba3f3] hover:text-white transition-colors"
+                      >
+                        View Project
+                      </a>
+                      <span className="text-[#dba3f3]">|</span>
+                      <a
+                        href="#"
+                        className="text-[#dba3f3] hover:text-white transition-colors"
+                      >
+                        GitHub
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </Section>
@@ -465,9 +713,9 @@ const App = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <div className="space-y-6">
                 <p className="text-lg text-white pop-up delay-2">
-                  Feel free to reach out to me for any questions or opportunities.
-                  I'm always open to discussing new projects, creative ideas, or
-                  opportunities to be part of your visions.
+                  Feel free to reach out to me for any questions or
+                  opportunities. I'm always open to discussing new projects,
+                  creative ideas, or opportunities to be part of your visions.
                 </p>
                 <div className="space-y-4 pop-up delay-3">
                   <div className="flex items-center text-white">
@@ -475,21 +723,21 @@ const App = () => {
                       icon={faEnvelope}
                       className="mr-4 text-[#dba3f3]"
                     />
-                    <span>email@example.com</span>
+                    <span>simranbansal6903@gmail.com</span>
                   </div>
                   <div className="flex items-center text-white">
                     <FontAwesomeIcon
                       icon={faGithub}
                       className="mr-4 text-[#dba3f3]"
                     />
-                    <span>github.com/username</span>
+                    <span>github.com/Simranbansal03</span>
                   </div>
                   <div className="flex items-center text-white">
                     <FontAwesomeIcon
                       icon={faLinkedin}
                       className="mr-4 text-[#dba3f3]"
                     />
-                    <span>linkedin.com/in/username</span>
+                    <span>linkedin.com/in/simran-bansal-67a1a3225</span>
                   </div>
                 </div>
               </div>
@@ -521,9 +769,17 @@ const App = () => {
             </div>
           </div>
         </Section>
-      </main>
-    </div>
+      </main >
+
+      {/* Overlay for mobile menu blur effect */}
+      < div
+        className={`fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${isMenuOpen ? "opacity-100 z-40" : "opacity-0 pointer-events-none"
+          }`}
+        onClick={() => setIsMenuOpen(false)}
+      ></div >
+    </div >
   );
 };
+
 
 export default App;
