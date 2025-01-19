@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Lottie from "react-lottie-player";
 import "./index.css";
+import emailjs from "emailjs-com";
 import LoadingAnimation from "./LoadingAnimation.json";
 import Education from "./Eduani.json";
 import DeveloperAnimation from "./Animation.json";
@@ -13,8 +14,9 @@ import {
   faInstagram,
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
+import { AiFillGithub } from "react-icons/ai";
 import { useInView } from "react-intersection-observer";
-import project1image from "./assets/pg.jpg"
+import project1image from "./assets/pg.jpg";
 //Projects Component
 const projects = [
   {
@@ -105,8 +107,9 @@ const Section = ({ id, children, className = "" }) => {
     <section
       id={id}
       ref={ref}
-      className={`transition-opacity duration-1000 ${inView ? "fade-in" : "fade-out"
-        } ${className} ${id !== "home" ? "pt-24" : ""}`}
+      className={`transition-opacity duration-1000 ${
+        inView ? "fade-in" : "fade-out"
+      } ${className} ${id !== "home" ? "pt-24" : ""}`}
     >
       {children}
     </section>
@@ -122,6 +125,42 @@ const SeparatorLine = () => {
   );
 };
 const App = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .send(
+        "service_toqt428", // Replace with your EmailJS service ID
+        "template_mlt077e", // Replace with your EmailJS template ID
+        {
+          from_name: formData.name,
+          reply_to: formData.email,
+          message: formData.message,
+        },
+        "KDhOhBE3Gnb19P5Sg" // Replace with your EmailJS user ID
+      )
+      .then((response) => {
+        console.log("Email sent successfully!", response);
+        setFormData({ name: "", email: "", message: "" });
+      })
+      .catch((error) => {
+        console.error("Error sending email:", error);
+      });
+  };
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -156,7 +195,6 @@ const App = () => {
             {"<Simran/>"}
           </a>
         </div>
-
 
         {/* Desktop Navigation Links */}
         <div className="hidden lg:flex items-center space-x-8">
@@ -229,8 +267,11 @@ const App = () => {
 
         {/* Mobile Menu */}
         <div
-          className={`fixed top-4 right-4 bg-[#05091d] transition-transform duration-300 lg:hidden rounded-lg shadow-lg ${isMenuOpen ? "transform translate-x-0" : "transform translate-x-full"
-            }`}
+          className={`fixed top-4 right-4 bg-[#05091d] transition-transform duration-300 lg:hidden rounded-lg shadow-lg ${
+            isMenuOpen
+              ? "transform translate-x-0"
+              : "transform translate-x-full"
+          }`}
         >
           <div className="flex flex-col p-4 w-64 space-y-2">
             <a
@@ -282,7 +323,10 @@ const App = () => {
       {/* Main Content */}
       <main className="pt-16 px-5 pb-5">
         {/* Home Section */}
-        <Section id="home" className="h-screen flex items-center justify-between px-4 md:px-8">
+        <Section
+          id="home"
+          className="h-screen flex items-center justify-between px-4 md:px-8"
+        >
           <div className="flex flex-col md:flex-row items-center justify-between w-full max-w-6xl mx-auto">
             {/* Left Side - Text Content */}
             <div className="md:w-1/2 text-left space-y-6">
@@ -298,12 +342,16 @@ const App = () => {
                 />
               </h2>
               <p className="text-base md:text-xl text-white max-w-xl">
-                Passionate web developer with experience in creating dynamic and responsive websites. I love to build web applications that solve real-world problems and enhance user experiences.
+                Passionate web developer with experience in creating dynamic and
+                responsive websites. I love to build web applications that solve
+                real-world problems and enhance user experiences.
               </p>
               <div className="flex gap-4">
                 <button
                   onClick={() =>
-                    document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })
+                    document
+                      .getElementById("projects")
+                      .scrollIntoView({ behavior: "smooth" })
                   }
                   className="bg-[#9020c0] text-white py-2 px-6 rounded-md hover:bg-[#a027ec] transition-colors"
                 >
@@ -354,7 +402,10 @@ const App = () => {
                   >
                     <SiLeetcode className="text-2xl text-[#f8f6f8] hover:text-[#c77ef0] transition-all duration-300" />
                   </a>
-                  <a href="mailto:simranbansal6903@gmail.com" className="social-icon-link">
+                  <a
+                    href="mailto:simranbansal6903@gmail.com"
+                    className="social-icon-link"
+                  >
                     <FaEnvelope className="text-2xl text-[#fcfbfd] hover:text-[#c77ef0] transition-all duration-300" />
                   </a>
                 </div>
@@ -374,25 +425,27 @@ const App = () => {
               <div className="md:w-3/5">
                 <div className="space-y-6 text-lg">
                   <p className="text-white pop-up delay-2">
-                    Hi, I'm Simran, a driven software engineer from India, fueled by a passion for harnessing technology
-                    to drive positive change. My fascination with coding began in college, where
-                    I discovered the thrill of crafting innovative solutions.
-
+                    Hi, I'm Simran, a driven software engineer from India,
+                    fueled by a passion for harnessing technology to drive
+                    positive change. My fascination with coding began in
+                    college, where I discovered the thrill of crafting
+                    innovative solutions.
                   </p>
 
                   <p className="text-white pop-up delay-3">
-                    Currently, I'm pursuing my postgraduate degree in Computer Science Engineering,
-                    with a focus on web development and software engineering. What really gets me
-                    excited is the potential for technology to tackle
-                    real-world challenges and transform lives.
-
+                    Currently, I'm pursuing my postgraduate degree in Computer
+                    Science Engineering, with a focus on web development and
+                    software engineering. What really gets me excited is the
+                    potential for technology to tackle real-world challenges and
+                    transform lives.
                   </p>
 
                   <p className="text-white pop-up delay-4">
-                    Beyond coding, I'm drawn to the world of open-source contributions and staying
-                    ahead of the tech curve. I believe that community, collaboration,
-                    and knowledge sharing are the keys to unlocking true innovation
-                    – which is why I'm always eager to participate in tech communities and joint projects.
+                    Beyond coding, I'm drawn to the world of open-source
+                    contributions and staying ahead of the tech curve. I believe
+                    that community, collaboration, and knowledge sharing are the
+                    keys to unlocking true innovation – which is why I'm always
+                    eager to participate in tech communities and joint projects.
                   </p>
                 </div>
 
@@ -400,7 +453,7 @@ const App = () => {
                   <a
                     href="https://drive.google.com/uc?export=download&id=1AfQVQ1QJ7_tDpA0ewZpAtOBRA0VGde99"
                     className="bg-[#69188c] text-white py-3 px-6 rounded-md hover:bg-[#c77ef0] transition-colors flex items-center"
-                    style={{ display: 'inline-block', textDecoration: 'none' }}
+                    style={{ display: "inline-block", textDecoration: "none" }}
                   >
                     <FontAwesomeIcon icon={faCamera} className="mr-2" />
                     Download CV
@@ -440,16 +493,33 @@ const App = () => {
                     <div className="relative w-4 h-4 bg-transparent z-10 mt-1">
                       <div className="w-3 h-3 bg-[#dba3f3] rounded-full"></div>
                     </div>
-                    <h3 className="text-[#dba3f3] text-lg ml-4">Programming Languages</h3>
+                    <h3 className="text-[#dba3f3] text-lg ml-4">
+                      Programming Languages
+                    </h3>
                   </div>
                   <div className="pl-8">
                     <div className="grid grid-cols-3 gap-8">
                       {[
-                        { name: "C++", icon: "devicon-cplusplus-plain hover:text-[#c77ef0]" },
-                        { name: "HTML", icon: "devicon-html5-plain hover:text-[#c77ef0]" },
-                        { name: "CSS", icon: "devicon-css3-plain hover:text-[#c77ef0]" },
-                        { name: "JavaScript", icon: "devicon-javascript-plain hover:text-[#c77ef0]" },
-                        { name: "C", icon: "devicon-c-plain hover:text-[#c77ef0]" },
+                        {
+                          name: "C++",
+                          icon: "devicon-cplusplus-plain hover:text-[#c77ef0]",
+                        },
+                        {
+                          name: "HTML",
+                          icon: "devicon-html5-plain hover:text-[#c77ef0]",
+                        },
+                        {
+                          name: "CSS",
+                          icon: "devicon-css3-plain hover:text-[#c77ef0]",
+                        },
+                        {
+                          name: "JavaScript",
+                          icon: "devicon-javascript-plain hover:text-[#c77ef0]",
+                        },
+                        {
+                          name: "C",
+                          icon: "devicon-c-plain hover:text-[#c77ef0]",
+                        },
                       ].map((lang, index) => (
                         <div
                           key={index}
@@ -474,14 +544,25 @@ const App = () => {
                     <div className="relative w-4 h-4 bg-transparent z-10 mt-1">
                       <div className="w-3 h-3 bg-[#dba3f3] rounded-full"></div>
                     </div>
-                    <h3 className="text-[#dba3f3] text-lg ml-4">Frameworks/Libraries</h3>
+                    <h3 className="text-[#dba3f3] text-lg ml-4">
+                      Frameworks/Libraries
+                    </h3>
                   </div>
                   <div className="pl-8">
                     <div className="grid grid-cols-3 gap-8">
                       {[
-                        { name: "ReactJS", icon: "devicon-react-original hover:text-[#c77ef0]" },
-                        { name: "Bootstrap", icon: "devicon-bootstrap-plain hover:text-[#c77ef0]" },
-                        { name: "Tailwind", icon: "devicon-tailwindcss-plain hover:text-[#c77ef0]" },
+                        {
+                          name: "ReactJS",
+                          icon: "devicon-react-original hover:text-[#c77ef0]",
+                        },
+                        {
+                          name: "Bootstrap",
+                          icon: "devicon-bootstrap-plain hover:text-[#c77ef0]",
+                        },
+                        {
+                          name: "Tailwind",
+                          icon: "devicon-tailwindcss-plain hover:text-[#c77ef0]",
+                        },
                       ].map((framework, index) => (
                         <div
                           key={index}
@@ -511,14 +592,38 @@ const App = () => {
                   <div className="pl-8">
                     <div className="grid grid-cols-3 gap-8">
                       {[
-                        { name: "MySQL", icon: "devicon-mysql-plain hover:text-[#c77ef0]" },
-                        { name: "VS Code", icon: "devicon-vscode-plain hover:text-[#c77ef0]" },
-                        { name: "Canva", icon: "devicon-canva-plain hover:text-[#c77ef0]" },
-                        { name: "Figma", icon: "devicon-figma-plain hover:text-[#c77ef0]" },
-                        { name: "Photoshop", icon: "devicon-photoshop-plain hover:text-[#c77ef0]" },
-                        { name: "Git", icon: "devicon-git-plain hover:text-[#c77ef0]" },
-                        { name: "GitHub", icon: "devicon-github-original hover:text-[#c77ef0]" },
-                        { name: "ViteJS", icon: "devicon-vitejs-plain hover:text-[#c77ef0]" },
+                        {
+                          name: "MySQL",
+                          icon: "devicon-mysql-plain hover:text-[#c77ef0]",
+                        },
+                        {
+                          name: "VS Code",
+                          icon: "devicon-vscode-plain hover:text-[#c77ef0]",
+                        },
+                        {
+                          name: "Canva",
+                          icon: "devicon-canva-plain hover:text-[#c77ef0]",
+                        },
+                        {
+                          name: "Figma",
+                          icon: "devicon-figma-plain hover:text-[#c77ef0]",
+                        },
+                        {
+                          name: "Photoshop",
+                          icon: "devicon-photoshop-plain hover:text-[#c77ef0]",
+                        },
+                        {
+                          name: "Git",
+                          icon: "devicon-git-plain hover:text-[#c77ef0]",
+                        },
+                        {
+                          name: "GitHub",
+                          icon: "devicon-github-original hover:text-[#c77ef0]",
+                        },
+                        {
+                          name: "ViteJS",
+                          icon: "devicon-vitejs-plain hover:text-[#c77ef0]",
+                        },
                       ].map((tool, index) => (
                         <div
                           key={index}
@@ -569,9 +674,15 @@ const App = () => {
                         <div className="w-3 h-3 bg-[#dba3f3] rounded-full"></div>
                       </div>
                       <div className="ml-4">
-                        <h4 className="text-2xl font-bold text-white mb-1">{exp.title}</h4>
-                        <p className="text-[#dba3f3] text-lg mb-1">{exp.from}</p>
-                        <p className="text-[#dba3f3] text-lg mb-3">{exp.period}</p>
+                        <h4 className="text-2xl font-bold text-white mb-1">
+                          {exp.title}
+                        </h4>
+                        <p className="text-[#dba3f3] text-lg mb-1">
+                          {exp.from}
+                        </p>
+                        <p className="text-[#dba3f3] text-lg mb-3">
+                          {exp.period}
+                        </p>
                         <p className="text-gray-300 text-lg leading-relaxed">
                           {exp.description}
                         </p>
@@ -581,8 +692,8 @@ const App = () => {
                 ))}
               </div>
             </div>
-          </div >
-        </Section >
+          </div>
+        </Section>
         <SeparatorLine />
 
         {/* Education Section */}
@@ -626,7 +737,6 @@ const App = () => {
                       <p className="text-gray-400 mb-3">2021 - 2025</p>
                       <ul className="space-y-2 text-gray-300">
                         <li>•Computer Science & Engineering</li>
-
                       </ul>
                     </div>
                   </div>
@@ -658,7 +768,7 @@ const App = () => {
                 <div className="education-card bg-[#130950]/30 rounded-xl p-6 hover:bg-[#130950] transition-all duration-300">
                   <div className="flex items-start gap-4">
                     <img
-                      src="/cchs.png"
+                      src="/cchs2.png"
                       alt="College Logo"
                       className="w-20 h-20 rounded-lg"
                     />
@@ -671,7 +781,8 @@ const App = () => {
                       </h4>
                       <p className="text-gray-400 mb-3">2018 - 2019</p>
                       <p className="text-gray-300">
-                        •Completed Secondary Education with focus on Academic Excellence.
+                        •Completed Secondary Education with focus on Academic
+                        Excellence.
                       </p>
                     </div>
                   </div>
@@ -684,62 +795,53 @@ const App = () => {
         <SeparatorLine />
         {/* Projects Section */}
         <Section id="projects">
-          <div className="max-w-6xl mx-auto px-4">
-            <h2 className="text-4xl font-bold mb-8 ml-5 text-white pop-up delay-1">
-              Projects.<span className="text-[#dba3f3]"></span>
+          <div className="max-w-6xl mx-auto px-4 ">
+            <h2 className="text-3xl font-bold mb-8 text-white pop-up delay-1">
+              Projects<span className="text-[#dba3f3]">.</span>
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {projects.map((project) => (
                 <div
                   key={project.id}
-                  className="bg-[#130950] rounded-lg overflow-hidden shadow-lg pop-up delay-2"
+                  className="bg-[#130950] rounded-xl p-6 hover:bg-[#1a1a2e]/80 transition-all duration-300"
                 >
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-48 object-cover"
-                  />
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-white mb-2">
-                      {project.title}
-                    </h3>
-                    <p className="text-gray-300 mb-2">Tech Stack</p>
-                    <div className="flex space-x-2 mt-2">
-                      {project.techStack.map((icon, index) => (
-                        <i key={index} className={`${icon} text-white`}></i>
-                      ))}
+                  <div className="flex items-start gap-4">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-16 h-16 rounded-full"
+                    />
+                    <div>
+                      <h3 className="text-[#dba3f3] text-xl font-semibold mb-1">
+                        {project.title}
+                      </h3>
+                      <p className="text-gray-300 mb-2">Tech Stack</p>
+                      <div className="flex space-x-2 mt-2">
+                        {project.techStack.map((icon, index) => (
+                          <i key={index} className={`${icon} text-white`}></i>
+                        ))}
+                      </div>
                     </div>
-                    <p className="text-gray-300 mb-4">{project.description}</p>
-                    <div className="flex gap-2">
-                      {project.projectLink && (
-                        <a
-                          href={project.projectLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-[#dba3f3] hover:text-white transition-colors"
-                        >
-                          View Project
-                        </a>
-                      )}
-                      <span className="text-[#dba3f3]">|</span>
-                      {project.githubLink && (
-                        <a
-                          href={project.githubLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-[#dba3f3] hover:text-white transition-colors"
-                        >
-                          GitHub
-                        </a>
-                      )}
-                    </div>
+                  </div>
+                  <p className="text-gray-300 mb-4">{project.description}</p>
+                  <div className="flex justify-start items-center">
+                    {project.githubLink && (
+                      <a
+                        href={project.githubLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#dba3f3] hover:text-[#dc6c3c] transition-colors"
+                      >
+                        <AiFillGithub size="1.5rem" />
+                      </a>
+                    )}
                   </div>
                 </div>
               ))}
             </div>
           </div>
         </Section>
-        
+
         <SeparatorLine />
 
         {/* Contact Section */}
@@ -780,18 +882,27 @@ const App = () => {
                 </div>
               </div>
               <div className="pop-up delay-4">
-                <form className="space-y-4">
+                <form className="space-y-4" onSubmit={handleSubmit}>
                   <input
                     type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
                     placeholder="Name"
                     className="w-full p-3 rounded-md bg-[#130950] text-white border border-[#dba3f3] focus:outline-none focus:border-[#c77ef0]"
                   />
                   <input
                     type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     placeholder="Email"
                     className="w-full p-3 rounded-md bg-[#130950] text-white border border-[#dba3f3] focus:outline-none focus:border-[#c77ef0]"
                   />
                   <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
                     placeholder="Message"
                     rows="4"
                     className="w-full p-3 rounded-md bg-[#130950] text-white border border-[#dba3f3] focus:outline-none focus:border-[#c77ef0]"
@@ -807,17 +918,17 @@ const App = () => {
             </div>
           </div>
         </Section>
-      </main >
+      </main>
 
       {/* Overlay for mobile menu blur effect */}
-      < div
-        className={`fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${isMenuOpen ? "opacity-100 z-40" : "opacity-0 pointer-events-none"
-          }`}
+      <div
+        className={`fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${
+          isMenuOpen ? "opacity-100 z-40" : "opacity-0 pointer-events-none"
+        }`}
         onClick={() => setIsMenuOpen(false)}
-      ></div >
-    </div >
+      ></div>
+    </div>
   );
 };
-
 
 export default App;
