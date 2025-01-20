@@ -373,7 +373,7 @@ const App = () => {
             <div className="md:w-1/2 flex justify-center items-center">
               <div className="relative flex md:flex-row flex-col items-center gap-8">
                 <img
-                  src="./file666.png"
+                  src="./file89.png"
                   alt="Developer Illustration"
                   className="w-full h-auto max-w-xs md:max-w-md object-contain animate-glow"
                 />
@@ -416,7 +416,7 @@ const App = () => {
         <SeparatorLine />
 
         {/* About Section */}
-        <Section id="about">
+        <Section id="about"  >
           <div className="max-w-6xl mx-auto px-4">
             <h2 className="text-4xl font-bold mb-8 ml-5 text-[#fefefe] pop-up delay-1">
               {"About."}
