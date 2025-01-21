@@ -32,9 +32,15 @@ html, body {
 /* ====== Section Styles ====== */
 section {
   scroll-margin-top: 4rem;
-  min-height: 100vh;
+  min-height: auto;
   position: relative;
   width: 100%;
+  padding: 2rem 0;
+}
+
+.separator-line {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .h-screen {
@@ -134,6 +140,7 @@ section {
   color: #dba3f3;
   transition: color 0.3s ease;
 }
+
 .social-icon-btn:hover svg {
   color: #c77ef0;
 }
@@ -196,7 +203,7 @@ input:focus, textarea:focus {
   section {
     min-height: 100vh;
     height: auto;
-    padding: 4rem 0;
+    padding: 2rem 0;
   }
   
   .h-screen {

@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
+import emailjs from "emailjs-com";
 import Lottie from "react-lottie-player";
 import "./index.css";
-import emailjs from "emailjs-com";
-import LoadingAnimation from "./LoadingAnimation.json";
+import { TypeAnimation } from 'react-type-animation';
 import Education from "./Eduani.json";
 import DeveloperAnimation from "./Animation.json";
-import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
-import { SiLeetcode } from "react-icons/si";
+import LoadingAnimation from "./LoadingAnimation.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faCamera } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -15,17 +14,24 @@ import {
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
 import { AiFillGithub } from "react-icons/ai";
+import { BsLink45Deg } from "react-icons/bs";
+import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
+import { SiLeetcode } from "react-icons/si";
 import { useInView } from "react-intersection-observer";
 import project1image from "./assets/pg.jpg";
+import project3image from "./assets/figma2.png";
+import project4image from "./assets/dnk.png";
+import project2image from "./assets/Netflix.jpg";
+import { IoIosLink } from "react-icons/io";
 //Projects Component
 const projects = [
   {
     id: 1,
     image: project1image,
-    title: "Project Title 1",
+    title: "PGLife",
     description: "Brief description of the project and the technologies used.",
-    projectLink: "https://example.com/project1",
-    githubLink: "https://github.com/username/project1",
+    // projectLink: "https://example.com/project1",
+    githubLink: "https://github.com/Simranbansal03/Pg_Life",
     techStack: [
       "devicon-html5-plain-wordmark colored",
       "devicon-php-plain colored",
@@ -35,13 +41,36 @@ const projects = [
   },
   {
     id: 2,
-    image: "./assets/project2.jpg",
-    title: "Project Title 2",
+    image: project2image,
+    title: "Netflix Clone",
     description: "Brief description of the project and the technologies used.",
-    projectLink: "https://example.com/project2",
-    githubLink: "https://github.com/username/project2",
-    techStack: ["devicon-python-plain", "devicon-django-plain"],
+    // projectLink: "https://example.com/project2",
+    githubLink: "https://github.com/Simranbansal03/Netflix-Clone",
+    techStack: [
+      "devicon-html5-plain-wordmark colored",
+      "devicon-css3-plain colored",
+      "devicon-javascript-plain colored",],
   },
+  {
+    id: 3,
+    image: project3image,
+    title: "Talkza: Language Translator",
+    description: "Brief description of the project and the technologies used.",
+    // projectLink: "https://example.com/project2",
+    githubLink: "https://www.figma.com/design/e78G6RgmpNk8mMzttzCJjr/language-translator?node-id=0-1&t=Hv04YrZgKZknobJB-1",
+    techStack: [
+      "devicon-figma-plain",],
+  },
+  {
+    id: 4,
+    image: project4image,
+    title: "DNK Design",
+    description: "Brief description of the project and the technologies used.",
+    // projectLink: "https://example.com/project2",
+    githubLink: "https://www.figma.com/design/574eiZ8koeVtQrhV4F1jSk/DNK-WEBSITE?node-id=16-74&t=480TWjjjebCHVIdT-1",
+    techStack: [
+      "devicon-figma-plain",],
+  }
   // Add more projects as needed
 ];
 
@@ -96,7 +125,6 @@ const Typewriter = ({ texts, typingSpeed = 150, pauseTime = 2000 }) => {
   );
 };
 
-// Section Component
 const Section = ({ id, children, className = "" }) => {
   const [ref, inView] = useInView({
     threshold: 0.1,
@@ -107,16 +135,15 @@ const Section = ({ id, children, className = "" }) => {
     <section
       id={id}
       ref={ref}
-      className={`transition-opacity duration-1000 ${
-        inView ? "fade-in" : "fade-out"
-      } ${className} ${id !== "home" ? "pt-24" : ""}`}
+      className={`transition-opacity duration-1000 ${inView ? "fade-in" : "fade-out"
+        } ${className} ${id !== "home" ? "pt-20" : ""}`}
     >
       {children}
     </section>
   );
 };
 
-// Separator Line Component
+// Separator Line Component - Using Simran's colors
 const SeparatorLine = () => {
   return (
     <div className="w-[95%] md:w-[97%] lg:w-[95%] max-w-[1100px] h-[2px] mx-auto my-8">
@@ -124,6 +151,8 @@ const SeparatorLine = () => {
     </div>
   );
 };
+
+// Start of App Component
 const App = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -143,14 +172,14 @@ const App = () => {
 
     emailjs
       .send(
-        "service_toqt428", // Replace with your EmailJS service ID
-        "template_mlt077e", // Replace with your EmailJS template ID
+        "service_toqt428", // Keeping Simran's EmailJS credentials
+        "template_mlt077e",
         {
           from_name: formData.name,
           reply_to: formData.email,
           message: formData.message,
         },
-        "KDhOhBE3Gnb19P5Sg" // Replace with your EmailJS user ID
+        "KDhOhBE3Gnb19P5Sg"
       )
       .then((response) => {
         console.log("Email sent successfully!", response);
@@ -185,7 +214,7 @@ const App = () => {
   return (
     <div className="min-h-screen bg-[#05091d]">
       {/* Top Navigation Bar */}
-      <nav className="fixed top-0 left-0 right-7 bg-[#05091d] h-16 flex items-center justify-between px-6 z-50">
+      <nav className="fixed top-0 left-0 right-0 bg-[#05091d] h-16 flex items-center justify-between px-6 z-50">
         {/* Logo Section */}
         <div className="flex items-center">
           <a
@@ -197,7 +226,7 @@ const App = () => {
         </div>
 
         {/* Desktop Navigation Links */}
-        <div className="hidden lg:flex items-center space-x-8">
+        <div className="hidden lg:flex items-center mr-9 space-x-8">
           <a
             href="#home"
             className="text-white text-xl hover:text-[#dba3f3] transition-colors"
@@ -236,7 +265,7 @@ const App = () => {
           </a>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Menu Button for Mobile */}
         <button
           className="lg:hidden fixed top-4 right-4 z-50 bg-[#05091d] rounded-lg p-2"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -267,11 +296,8 @@ const App = () => {
 
         {/* Mobile Menu */}
         <div
-          className={`fixed top-4 right-4 bg-[#05091d] transition-transform duration-300 lg:hidden rounded-lg shadow-lg ${
-            isMenuOpen
-              ? "transform translate-x-0"
-              : "transform translate-x-full"
-          }`}
+          className={`fixed top-4 right-4 bg-[#05091d] transition-transform duration-300 lg:hidden rounded-lg shadow-lg ${isMenuOpen ? "transform translate-x-0" : "transform translate-x-full"
+            }`}
         >
           <div className="flex flex-col p-4 w-64 space-y-2">
             <a
@@ -320,94 +346,114 @@ const App = () => {
         </div>
       </nav>
 
+      {/* Overlay for mobile menu blur effect */}
+      <div
+        className={`fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${isMenuOpen ? "opacity-100 z-40" : "opacity-0 pointer-events-none"
+          }`}
+        onClick={() => setIsMenuOpen(false)}
+      ></div>
+
       {/* Main Content */}
-      <main className="pt-16 px-5 pb-5">
+      <main className="pt-10 px-5 pb-5">
         {/* Home Section */}
         <Section
           id="home"
           className="h-screen flex items-center justify-between px-4 md:px-8"
         >
-          <div className="flex flex-col md:flex-row items-center justify-between w-full max-w-6xl mx-auto">
-            {/* Left Side - Text Content */}
-            <div className="md:w-1/2 text-left space-y-6">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white">
-                Hi there! I am
-              </h1>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white gradient-text">
-                Simran Bansal
-              </h1>
-              <h2 className="text-xl md:text-3xl text-[#debdec]">
-                <Typewriter
-                  texts={["Web Developer", "Creative Coder", "Tech Enthusiast"]}
-                />
-              </h2>
-              <p className="text-base md:text-xl text-white max-w-xl">
-                Passionate web developer with experience in creating dynamic and
-                responsive websites. I love to build web applications that solve
-                real-world problems and enhance user experiences.
-              </p>
-              <div className="flex gap-4">
-                <button
-                  onClick={() =>
-                    document
-                      .getElementById("projects")
-                      .scrollIntoView({ behavior: "smooth" })
-                  }
-                  className="bg-[#9020c0] text-white py-2 px-6 rounded-md hover:bg-[#a027ec] transition-colors"
-                >
-                  View Work
-                </button>
-                <a
-                  href="https://linkedin.com/in/simran-bansal-67a1a3225"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <button className="bg-transparent text-white py-2 px-6 rounded-md border border-[#dba3f3] hover:bg-[#dba3f3]/10 transition-colors">
-                    Contact Me
-                  </button>
-                </a>
-              </div>
-            </div>
-
-            {/* Right Side - Illustration */}
-            <div className="md:w-1/2 flex justify-center items-center">
-              <div className="relative flex md:flex-row flex-col items-center gap-8">
-                <img
-                  src="./file89.png"
-                  alt="Developer Illustration"
-                  className="w-full h-auto max-w-xs md:max-w-md object-contain animate-glow"
-                />
-                <div className="social-links md:absolute md:right-[-4rem] md:top-1/2 md:transform md:-translate-y-1/2 flex md:flex-col flex-row items-center md:gap-6 gap-4 mt-4 md:mt-0">
-                  <a
-                    href="https://github.com/Simranbansal03"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="social-icon-link"
+          <div className="max-w-6xl mx-auto px-4 min-h-screen flex items-center">
+            <div className="flex flex-col md:flex-row items-center justify-between w-full gap-8">
+              {/* Left Side - Text Content */}
+              <div className="md:w-1/2 text-left space-y-6">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white pop-up delay-1">
+                  Hi there! I am
+                </h1>
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white pop-up delay-1 gradient-text">
+                  Simran Bansal
+                </h1>
+                <h2 className="text-2xl md:text-3xl text-[#debdec]">
+                  <TypeAnimation
+                    sequence={[
+                      'Web Developer',
+                      1000,
+                      'Creative Coder',
+                      1000,
+                      'Tech Enthusiast',
+                      1000,
+                      'UI/UX Designer',
+                      1000,
+                    ]}
+                    wrapper="span"
+                    speed={50}
+                    repeat={Infinity}
+                  />
+                </h2>
+                <p className="text-base md:text-xl text-white max-w-xl pop-up delay-3">
+                  Passionate web developer with experience in creating dynamic and
+                  responsive websites. I love to build web applications that solve
+                  real-world problems and enhance user experiences.
+                </p>
+                <div className="flex gap-4 pop-up delay-4">
+                  <button
+                    onClick={() =>
+                      document
+                        .getElementById("projects")
+                        .scrollIntoView({ behavior: "smooth" })
+                    }
+                    className="view-work-btn bg-[#9020c0] text-white py-2 px-6 rounded-md hover:bg-[#a027ec] transition-all duration-300"
                   >
-                    <FaGithub className="text-2xl text-[#ffffff] hover:text-[#c77ef0] transition-all duration-300" />
-                  </a>
+                    View Work
+                  </button>
                   <a
                     href="https://linkedin.com/in/simran-bansal-67a1a3225"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="social-icon-link"
+                    className="contact-btn bg-transparent text-white py-2 px-6 rounded-md border border-[#dba3f3] hover:bg-[#dba3f3]/10 transition-all duration-300"
                   >
-                    <FaLinkedin className="text-2xl text-[#fbfafb] hover:text-[#c77ef0] transition-all duration-300" />
+                    Contact Me
                   </a>
-                  <a
-                    href="https://leetcode.com/u/simranbansal6903/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="social-icon-link"
-                  >
-                    <SiLeetcode className="text-2xl text-[#f8f6f8] hover:text-[#c77ef0] transition-all duration-300" />
-                  </a>
-                  <a
-                    href="mailto:simranbansal6903@gmail.com"
-                    className="social-icon-link"
-                  >
-                    <FaEnvelope className="text-2xl text-[#fcfbfd] hover:text-[#c77ef0] transition-all duration-300" />
-                  </a>
+                </div>
+              </div>
+
+              {/* Right Side - Illustration */}
+              <div className="md:w-1/2 flex justify-center items-center">
+                <div className="relative flex md:flex-row flex-col items-center gap-8">
+                  <img
+                    src="./file89.png"
+                    alt="Developer Illustration"
+                    className="w-full h-auto max-w-xs md:max-w-md object-contain animate-glow"
+                  />
+                  <div className="social-links md:absolute md:right-[-4rem] md:top-1/2 md:transform md:-translate-y-1/2 flex md:flex-col flex-row items-center md:gap-6 gap-4 mt-4 md:mt-0">
+                    <a
+                      href="https://github.com/Simranbansal03"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="social-icon-link"
+                    >
+                      <FaGithub className="text-2xl text-[#ffffff] hover:text-[#c77ef0] transition-all duration-300" />
+                    </a>
+                    <a
+                      href="https://linkedin.com/in/simran-bansal-67a1a3225"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="social-icon-link"
+                    >
+                      <FaLinkedin className="text-2xl text-[#fbfafb] hover:text-[#c77ef0] transition-all duration-300" />
+                    </a>
+                    <a
+                      href="https://leetcode.com/u/simranbansal6903/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="social-icon-link"
+                    >
+                      <SiLeetcode className="text-2xl text-[#f8f6f8] hover:text-[#c77ef0] transition-all duration-300" />
+                    </a>
+                    <a
+                      href="mailto:simranbansal6903@gmail.com"
+                      className="social-icon-link"
+                    >
+                      <FaEnvelope className="text-2xl text-[#fcfbfd] hover:text-[#c77ef0] transition-all duration-300" />
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -416,56 +462,52 @@ const App = () => {
         <SeparatorLine />
 
         {/* About Section */}
-        <Section id="about"  >
+        <Section id="about" className="pt-8 pb-8">
           <div className="max-w-6xl mx-auto px-4">
-            <h2 className="text-4xl font-bold mb-8 ml-5 text-[#fefefe] pop-up delay-1">
-              {"About."}
+            <h2 className="text-3xl font-bold mb-8 text-white pop-up delay-1">
+              About<span className="text-[#dba3f3]">.</span>
             </h2>
             <div className="flex flex-col md:flex-row gap-12 items-center">
               <div className="md:w-3/5">
                 <div className="space-y-6 text-lg">
                   <p className="text-white pop-up delay-2">
-                    Hi, I'm Simran, a driven software engineer from India,
-                    fueled by a passion for harnessing technology to drive
-                    positive change. My fascination with coding began in
-                    college, where I discovered the thrill of crafting
-                    innovative solutions.
+                    Hi, I'm Simran, a driven software engineer from India, fueled by a
+                    passion for harnessing technology to drive positive change. My
+                    fascination with coding began in college, where I discovered the
+                    thrill of crafting innovative solutions.
                   </p>
 
                   <p className="text-white pop-up delay-3">
-                    Currently, I'm pursuing my postgraduate degree in Computer
-                    Science Engineering, with a focus on web development and
-                    software engineering. What really gets me excited is the
-                    potential for technology to tackle real-world challenges and
-                    transform lives.
+                    Currently, I'm pursuing my postgraduate degree in Computer Science
+                    Engineering, with a focus on web development and software
+                    engineering. What really gets me excited is the potential for
+                    technology to tackle real-world challenges and transform lives.
                   </p>
 
                   <p className="text-white pop-up delay-4">
-                    Beyond coding, I'm drawn to the world of open-source
-                    contributions and staying ahead of the tech curve. I believe
-                    that community, collaboration, and knowledge sharing are the
-                    keys to unlocking true innovation – which is why I'm always
-                    eager to participate in tech communities and joint projects.
+                    Beyond coding, I'm drawn to the world of open-source contributions
+                    and staying ahead of the tech curve. I believe that community,
+                    collaboration, and knowledge sharing are the keys to unlocking true
+                    innovation – which is why I'm always eager to participate in tech
+                    communities and joint projects.
                   </p>
                 </div>
 
-                <div className="mt-8 pop-up delay-5">
-                  <a
-                    href="https://drive.google.com/uc?export=download&id=1AfQVQ1QJ7_tDpA0ewZpAtOBRA0VGde99"
-                    className="bg-[#69188c] text-white py-3 px-6 rounded-md hover:bg-[#c77ef0] transition-colors flex items-center"
-                    style={{ display: "inline-block", textDecoration: "none" }}
-                  >
-                    <FontAwesomeIcon icon={faCamera} className="mr-2" />
-                    Download CV
-                  </a>
-                </div>
+                <a
+                  href="https://drive.google.com/uc?export=download&id=1AfQVQ1QJ7_tDpA0ewZpAtOBRA0VGde99"
+                  className="bg-[#69188c] text-white py-3 px-6 rounded-md hover:bg-[#c77ef0] transition-colors mt-7 flex items-center "
+                  style={{ display: "inline-block", textDecoration: "none" }}
+                >
+                  <FontAwesomeIcon icon={faCamera} className="mr-2" />
+                  Download CV
+                </a>
               </div>
 
               <div className="md:w-2/5 flex justify-center pop-up delay-3">
                 <img
                   src="./file6.png"
                   alt="Profile"
-                  className="w-full h-auto max-w-md object-contain"
+                  className="w-full h-full max-w-lg object-contain"
                   style={{
                     minHeight: "400px",
                     objectFit: "contain",
@@ -475,12 +517,12 @@ const App = () => {
             </div>
           </div>
         </Section>
-
         <SeparatorLine />
+
         {/* Skills & Experience Section */}
-        <Section id="skills">
+        <Section id="skills" className="pt-8 pb-8">
           <div className="max-w-6xl mx-auto px-4">
-            <h2 className="text-4xl font-bold mb-8 ml-5 text-white pop-up delay-1">
+            <h2 className="text-3xl font-bold mb-8 text-white pop-up delay-1">
               Skills & Experience<span className="text-[#dba3f3]">.</span>
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -525,12 +567,8 @@ const App = () => {
                           key={index}
                           className="flex flex-col items-center transition-transform hover:-translate-y-1"
                         >
-                          <i
-                            className={`${lang.icon} text-4xl text-white mb-3`}
-                          ></i>
-                          <span className="text-gray-300 text-sm">
-                            {lang.name}
-                          </span>
+                          <i className={`${lang.icon} text-4xl text-white mb-3`}></i>
+                          <span className="text-gray-300 text-sm">{lang.name}</span>
                         </div>
                       ))}
                     </div>
@@ -568,12 +606,8 @@ const App = () => {
                           key={index}
                           className="flex flex-col items-center transition-transform hover:-translate-y-1"
                         >
-                          <i
-                            className={`${framework.icon} text-4xl text-white mb-3`}
-                          ></i>
-                          <span className="text-gray-300 text-sm">
-                            {framework.name}
-                          </span>
+                          <i className={`${framework.icon} text-4xl text-white mb-3`}></i>
+                          <span className="text-gray-300 text-sm">{framework.name}</span>
                         </div>
                       ))}
                     </div>
@@ -629,12 +663,8 @@ const App = () => {
                           key={index}
                           className="flex flex-col items-center transition-transform hover:-translate-y-1"
                         >
-                          <i
-                            className={`${tool.icon} text-4xl text-white mb-3`}
-                          ></i>
-                          <span className="text-gray-300 text-sm">
-                            {tool.name}
-                          </span>
+                          <i className={`${tool.icon} text-4xl text-white mb-3`}></i>
+                          <span className="text-gray-300 text-sm">{tool.name}</span>
                         </div>
                       ))}
                     </div>
@@ -677,12 +707,8 @@ const App = () => {
                         <h4 className="text-2xl font-bold text-white mb-1">
                           {exp.title}
                         </h4>
-                        <p className="text-[#dba3f3] text-lg mb-1">
-                          {exp.from}
-                        </p>
-                        <p className="text-[#dba3f3] text-lg mb-3">
-                          {exp.period}
-                        </p>
+                        <p className="text-[#dba3f3] text-lg mb-1">{exp.from}</p>
+                        <p className="text-[#dba3f3] text-lg mb-3">{exp.period}</p>
                         <p className="text-gray-300 text-lg leading-relaxed">
                           {exp.description}
                         </p>
@@ -697,10 +723,10 @@ const App = () => {
         <SeparatorLine />
 
         {/* Education Section */}
-        <Section id="education">
+        <Section id="education" className="pt-8 pb-8">
           <div className="max-w-6xl mx-auto px-4">
             <h2 className="text-4xl font-bold mb-8 ml-5 text-white pop-up delay-1">
-              Education.
+              Education<span className="text-[#dba3f3]">.</span>
             </h2>
             <div className="flex flex-col md:flex-row gap-20">
               {/* Left Side - Illustration */}
@@ -731,9 +757,7 @@ const App = () => {
                       <h3 className="text-[#dba3f3] text-xl font-semibold mb-1">
                         Jaipur Engineering College and Research Center
                       </h3>
-                      <h4 className="text-white mb-2">
-                        Bachelor of Technology
-                      </h4>
+                      <h4 className="text-white mb-2">Bachelor of Technology</h4>
                       <p className="text-gray-400 mb-3">2021 - 2025</p>
                       <ul className="space-y-2 text-gray-300">
                         <li>•Computer Science & Engineering</li>
@@ -743,16 +767,16 @@ const App = () => {
                 </div>
 
                 {/* Education Card 2 */}
-                <div className="education-card bg-[#230950]/30 rounded-xl p-6 hover:bg-[#130950] transition-all duration-300">
+                <div className="education-card bg-[#130950]/30 rounded-xl p-6 hover:bg-[#130950] transition-all duration-300">
                   <div className="flex items-start gap-4">
                     <img
                       src="/cchs2.png"
-                      alt="College Logo"
+                      alt="School Logo"
                       className="w-20 h-20 rounded-lg"
                     />
                     <div>
                       <h3 className="text-[#dba3f3] text-xl font-semibold mb-1">
-                        Cambridge Court High School,Jaipur
+                        Cambridge Court High School, Jaipur
                       </h3>
                       <h4 className="text-white mb-2">
                         Senior Secondary Education(XII)
@@ -764,25 +788,23 @@ const App = () => {
                     </div>
                   </div>
                 </div>
+
                 {/* Education Card 3 */}
                 <div className="education-card bg-[#130950]/30 rounded-xl p-6 hover:bg-[#130950] transition-all duration-300">
                   <div className="flex items-start gap-4">
                     <img
                       src="/cchs2.png"
-                      alt="College Logo"
+                      alt="School Logo"
                       className="w-20 h-20 rounded-lg"
                     />
                     <div>
                       <h3 className="text-[#dba3f3] text-xl font-semibold mb-1">
-                        Cambridge Court High School,Jaipur
+                        Cambridge Court High School, Jaipur
                       </h3>
-                      <h4 className="text-white mb-2">
-                        Secondary Education(X)
-                      </h4>
+                      <h4 className="text-white mb-2">Secondary Education(X)</h4>
                       <p className="text-gray-400 mb-3">2018 - 2019</p>
                       <p className="text-gray-300">
-                        •Completed Secondary Education with focus on Academic
-                        Excellence.
+                        •Completed Secondary Education with focus on Academic Excellence.
                       </p>
                     </div>
                   </div>
@@ -791,48 +813,40 @@ const App = () => {
             </div>
           </div>
         </Section>
-
         <SeparatorLine />
+
         {/* Projects Section */}
-        <Section id="projects">
-          <div className="max-w-6xl mx-auto px-4 ">
+        <Section id="projects" className="pt-8 pb-8">
+          <div className="max-w-6xl mx-auto px-4">
             <h2 className="text-3xl font-bold mb-8 text-white pop-up delay-1">
-              Projects<span className="text-[#dba3f3]">.</span>
+              Projects<span className="text-[#efedf0]">.</span>
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {projects.map((project) => (
                 <div
                   key={project.id}
-                  className="bg-[#130950] rounded-xl p-6 hover:bg-[#1a1a2e]/80 transition-all duration-300"
+                  className="relative group overflow-hidden rounded-xl"
                 >
-                  <div className="flex items-start gap-4">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-16 h-16 rounded-full"
-                    />
-                    <div>
-                      <h3 className="text-[#dba3f3] text-xl font-semibold mb-1">
-                        {project.title}
-                      </h3>
-                      <p className="text-gray-300 mb-2">Tech Stack</p>
-                      <div className="flex space-x-2 mt-2">
-                        {project.techStack.map((icon, index) => (
-                          <i key={index} className={`${icon} text-white`}></i>
-                        ))}
-                      </div>
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-[250px] object-cover transition-transform duration-300 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#400354] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                    <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
+                    <div className="flex gap-2 mb-3">
+                      {project.techStack.map((tech, index) => (
+                        <i key={index} className={`${tech} text-2xl text-white`} />
+                      ))}
                     </div>
-                  </div>
-                  <p className="text-gray-300 mb-4">{project.description}</p>
-                  <div className="flex justify-start items-center">
                     {project.githubLink && (
                       <a
                         href={project.githubLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[#dba3f3] hover:text-[#dc6c3c] transition-colors"
+                        className="text-white hover:text-[#f41818] transition-colors"
                       >
-                        <AiFillGithub size="1.5rem" />
+                        <IoIosLink size="1.5rem" />
                       </a>
                     )}
                   </div>
@@ -841,21 +855,19 @@ const App = () => {
             </div>
           </div>
         </Section>
-
         <SeparatorLine />
-
         {/* Contact Section */}
-        <Section id="contact">
+        <Section id="contact" className="pt-8 pb-8">
           <div className="max-w-6xl mx-auto px-4">
             <h2 className="text-4xl font-bold mb-8 ml-5 text-white pop-up delay-1">
-              Contact.<span className="text-[#dba3f3]"></span>
+              Contact<span className="text-[#dba3f3]">.</span>
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <div className="space-y-6">
                 <p className="text-lg text-white pop-up delay-2">
-                  Feel free to reach out to me for any questions or
-                  opportunities. I'm always open to discussing new projects,
-                  creative ideas, or opportunities to be part of your visions.
+                  Feel free to reach out to me for any questions or opportunities. I'm
+                  always open to discussing new projects, creative ideas, or
+                  opportunities to be part of your visions.
                 </p>
                 <div className="space-y-4 pop-up delay-3">
                   <div className="flex items-center text-white">
@@ -919,14 +931,9 @@ const App = () => {
           </div>
         </Section>
       </main>
-
-      {/* Overlay for mobile menu blur effect */}
-      <div
-        className={`fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${
-          isMenuOpen ? "opacity-100 z-40" : "opacity-0 pointer-events-none"
-        }`}
-        onClick={() => setIsMenuOpen(false)}
-      ></div>
+      <div className="text-center py-4 text-gray-400 text-sm border-t border-[#dba3f3]/20">
+        © 2025 Simran Bansal. All Rights Reserved.
+      </div>
     </div>
   );
 };
