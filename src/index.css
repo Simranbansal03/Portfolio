@@ -19,14 +19,39 @@
 html, body {
   height: 100%;
   margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   background: #05091d;
   scroll-behavior: smooth;
+  overflow-x: hidden; /* Add this */
+  width: 100%; /* Add this */
+  position: relative; /* Add this */
 }
+
 
 #root {
   flex: 1;
+  overflow-x: hidden; /* Add this */
+  width: 100%; /* Add this */
+}
+
+/* ====== Container Control ====== */
+.max-w-6xl {
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+main {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+section {
+  width: 100vw;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 /* ====== Section Styles ====== */
@@ -224,6 +249,27 @@ input:focus, textarea:focus {
   .social-icon-btn {
     width: 2.25rem;
     height: 2.25rem;
+  }
+  .container, 
+  section, 
+  .max-w-6xl {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+  .px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .px-5 {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .px-6 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 }
 
