@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import emailjs from "emailjs-com";
+import * as emailjs from '@emailjs/browser';
 import Lottie from "react-lottie-player";
 import "./index.css";
 import { TypeAnimation } from 'react-type-animation';
@@ -169,25 +169,26 @@ const App = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    emailjs
-      .send(
-        "service_toqt428", // Keeping Simran's EmailJS credentials
-        "template_mlt077e",
-        {
-          from_name: formData.name,
-          reply_to: formData.email,
-          message: formData.message,
-        },
-        "KDhOhBE3Gnb19P5Sg"
-      )
-      .then((response) => {
-        console.log("Email sent successfully!", response);
-        setFormData({ name: "", email: "", message: "" });
-      })
-      .catch((error) => {
-        console.error("Error sending email:", error);
-      });
+    
+    const templateParams = {
+      from_name: formData.name,
+      reply_to: formData.email,
+      message: formData.message,
+    };
+  
+    emailjs.send(
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      templateParams,
+      import.meta.env.VITE_EMAILJS_USER_ID
+    )
+    .then((response) => {
+      console.log("SUCCESS!", response.status, response.text);
+      setFormData({ name: "", email: "", message: "" });
+    })
+    .catch((err) => {
+      console.log("FAILED...", err);
+    });
   };
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
