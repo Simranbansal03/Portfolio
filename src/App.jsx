@@ -268,9 +268,9 @@ const App = () => {
 
         {/* Menu Button for Mobile */}
         <button
-          className="lg:hidden fixed top-4 right-4 z-50 bg-[#05091d] rounded-lg p-2"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
+  className="lg:hidden fixed top-4 right-4 z-[60] bg-[#05091d] rounded-lg p-2"
+  onClick={() => setIsMenuOpen(!isMenuOpen)}
+>
           <svg
             className="w-6 h-6 text-white"
             fill="none"
@@ -297,10 +297,11 @@ const App = () => {
 
         {/* Mobile Menu */}
         <div
-          className={`fixed top-4 right-4 bg-[#05091d] transition-transform duration-300 lg:hidden rounded-lg shadow-lg ${isMenuOpen ? "transform translate-x-0" : "transform translate-x-full"
-            }`}
-        >
-          <div className="flex flex-col p-4 w-64 space-y-2">
+  className={`fixed top-0 right-0 h-screen w-64 bg-[#05091d] transition-transform duration-300 lg:hidden rounded-l-lg shadow-lg z-[55] ${
+    isMenuOpen ? "transform translate-x-0" : "transform translate-x-full"
+  }`}
+>
+  <div className="flex flex-col p-4 pt-16 space-y-2">
             <a
               href="#home"
               className="text-white py-2 px-4 hover:bg-[#130950] rounded-md transition-colors"
